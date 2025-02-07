@@ -6,13 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 
 class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $users = User::all();
 
@@ -26,7 +27,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -46,7 +47,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         try {
             $user = User::findOrFail($id);
@@ -67,7 +68,7 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         try {
             $user = User::findOrFail($id);
@@ -100,7 +101,7 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         try {
             $user = User::findOrFail($id);
